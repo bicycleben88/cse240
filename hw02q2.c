@@ -41,18 +41,18 @@ void part1(int x) {
 // Then correct/edit this function so that polyFunc and polyMacro produce same correct output of 36.			// (6 points)
 // 
 void part2(int x, int y) {
-	int x_copy = x, y_copy = y;
+	int x_copy = x + 1, y_copy = y + 1;
 
-	printf(" polyFunc(x, y) = %d \n polyMacro(x, y) = %d \n\n", polyFunc(++x, ++y), polyMacro(++x_copy, ++y_copy));
+	printf(" polyFunc(x, y) = %d \n polyMacro(x, y) = %d \n\n", polyFunc(++x, ++y), polyMacro(x_copy, y_copy));
 
 
 	// Replace the 4 blank spaces below with the actual output observed when running the code in VS and GCC.
 	// The blanks should have the answers of unedited program. Keep the answers in blanks as they were, after editing the program.
-	printf("In VS : the result of polyFunc = __ and polyMacro = __ \n"); 			// (6 points)
+	printf("In VS : the result of polyFunc = 36 and polyMacro = 25 \n"); 			// (6 points)
 	printf("In GCC: the result of polyFunc = 36 and polyMacro = 28 \n\n"); 		// (6 points)
 
 	// Explain in a short sentence why VS and GCC could possibly produce a different value for the same program and for the same input.
-	printf("Explanation: _____\n\n"); //  (3 points)
+	printf("Explanation: GCC and Visual Studio compile c programs differently. Thus, they have different ways of handling the side effects of macros \n\n"); //  (3 points)
 }
 
 // Do not edit main()  
