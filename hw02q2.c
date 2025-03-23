@@ -1,7 +1,7 @@
 /* 
 *  Description: Observing differences with the unary operator in GCC and Visual Studio
 *
-*  Completion time: 
+*  Completion time: 1 hour
 *
 *  Author: Ben Higginbotham
 *  03-23-2025
