@@ -1,7 +1,7 @@
  /* 
 *  Description: Write Macros off of functions
 *
-*  Completion time: 
+*  Completion time: 1 hour 
 *
 *  Author: Ben Higginbotham
 *  03-22-2025
@@ -43,10 +43,10 @@ int main() {
      a = 3, b = 6;
      printf("subf(a, b) = %d\n", subf(a, b));
      printf("subm(a, b) = %d\n", subm(a, b));
-     printf("subf(a++, b--) = %d\n", subf(++a, --b));
-     a = 3; b = 6; // reset a,b values
+     printf("subf(a++, b--) = %d\n", subf(a++, b--));
+     a = 3; b = 6;
      printf("subm(a++, b--) = %d\n", subm(a++, b--));
-     
+
      a = 3; b = 6;
      printf("cubef(a) = %d\n", cubef(a));
      printf("cubem(a) = %d\n", cubem(a));
