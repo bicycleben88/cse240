@@ -1,10 +1,10 @@
 /* 
-*  Description: Create Macros out of functions
+*  Description: Observing differences with the unary operator in GCC and Visual Studio
 *
 *  Completion time: 
 *
 *  Author: Ben Higginbotham
-*  Version # or date
+*  03-23-2025
 */
 
 #include <stdio.h>
@@ -26,12 +26,12 @@ int polyFunc(int a, int b) {
 void part1(int x) {
 
 	int result;
-	result = isPositive(++x);
+	result = isPositive(x++);
 
 	printf("isPositive(10) = %d \n\n", result);
 	
 	// Why did this error occur? Please provide the answer in your own words below.
-	printf("Explanation: _______\n\n\n"); // (3 points)
+	printf("Explanation: The unary operator was on the wrong side of the variable. When x++, the value of x is used to do the comparison and then it increments. So, isPositive(x++ = 9++) (x = 9 > 0) : x++ = 9++ = 10 : 0)\n\n\n"); // (3 points)
 }
 
 
@@ -49,7 +49,7 @@ void part2(int x, int y) {
 	// Replace the 4 blank spaces below with the actual output observed when running the code in VS and GCC.
 	// The blanks should have the answers of unedited program. Keep the answers in blanks as they were, after editing the program.
 	printf("In VS : the result of polyFunc = __ and polyMacro = __ \n"); 			// (6 points)
-	printf("In GCC: the result of polyFunc = __ and polyMacro = __ \n\n"); 		// (6 points)
+	printf("In GCC: the result of polyFunc = 36 and polyMacro = 28 \n\n"); 		// (6 points)
 
 	// Explain in a short sentence why VS and GCC could possibly produce a different value for the same program and for the same input.
 	printf("Explanation: _____\n\n"); //  (3 points)
