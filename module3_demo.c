@@ -17,6 +17,7 @@ int tail = 0; // next unused space
 void branching(char c);
 int insertion();
 int search();
+int delete();
 
 int main()
 {
@@ -44,7 +45,7 @@ void branching(char c) {
 		insertion();
 		break;
 	case 'd':
-		printf("delete()\n");
+		delete();
 		break;
 	case 's':
 		search();
@@ -91,4 +92,23 @@ int search() {
 
 	printf("The name does not exist \n");
 	return -1;
+}
+
+int delete() {
+	int k;
+	k = search();
+
+	if (k == -1) {
+		return -1;
+	}
+	else {
+		for (int i = k; i < tail; i++) {
+			strcpy(contactbook[i].name, contactbook[i + 1].name);
+			strcpy(contactbook[i].email, contactbook[i + 1].email);
+			contactbook[i].phone = contactbook[i + 1].phone;
+		}
+		printf("the index deleted was: %d\n", k);
+		tail--;
+		return k;
+	}
 }
