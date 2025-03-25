@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <ctype.h>
-#define MAX_CONTACTS 100
+#include <string.h>
 #pragma warning(disable : 4996) // needed in VS. Works like _CRT_SECURE_NO_WARNINGS.
 // ctrl e,v to copy line down
 
+#define MAX_CONTACTS 100
 struct contact {
 	char name[30];
 	int phone;
@@ -15,6 +16,7 @@ int tail = 0; // next unused space
 
 void branching(char c);
 int insertion();
+int search();
 
 int main()
 {
@@ -45,7 +47,7 @@ void branching(char c) {
 		printf("delete()\n");
 		break;
 	case 's':
-		printf("search()\n");
+		search();
 		break;
 	case 'p':
 		printf("print()\n");
@@ -72,4 +74,21 @@ int insertion() {
 		printf("The number of entries is %d\n", tail);
 		return 0;
 	}
+}
+
+int search() {
+	char tname[30];
+	printf("Please enter a name to search: \n");
+	scanf("%s", tname);
+
+	for (int i = 0; i < tail; i++) {
+		if (_stricmp(tname, contactbook[i].name) == 0) {
+			printf("phone: %d\n", contactbook[i].phone);
+			printf("email: %s\n", contactbook[i].email);
+			return i;
+		}
+	}
+
+	printf("The name does not exist \n");
+	return -1;
 }
