@@ -23,6 +23,16 @@ struct ContactNode* addFront(struct ContactNode* node, struct ContactNode* front
 	return front;
 }
 
+struct ContactNode* removeFront(struct ContactNode* front) {
+	if (front != NULL) {
+		struct ContactNode* temp = front;
+		front = front->next;
+		free(temp);
+	}
+
+	return front;
+}
+
 void display(struct ContactNode* front) {
 	struct ContactNode* iter = front;
 
@@ -31,6 +41,7 @@ void display(struct ContactNode* front) {
 		iter = iter->next;
 	}
 }
+
 
 int main()
 {
@@ -50,9 +61,15 @@ int main()
 
 	list = addFront(n1, list);
 	list = addFront(n2, list);
+	list = removeFront(list);
 	list = addFront(n3, list);
 
 	display(list);
 
+	while (list != NULL) {
+		list = removeFront(list);
+	}
+
 	return 0;
 }
+
