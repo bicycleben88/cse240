@@ -23,6 +23,15 @@ struct ContactNode* addFront(struct ContactNode* node, struct ContactNode* front
 	return front;
 }
 
+void display(struct ContactNode* front) {
+	struct ContactNode* iter = front;
+
+	while (iter) {
+		printf("name: %s, number: %d\n", iter->name, iter->phone);
+		iter = iter->next;
+	}
+}
+
 int main()
 {
 	struct ContactNode* n1 = malloc(sizeof(struct ContactNode));
@@ -33,13 +42,17 @@ int main()
 	strcpy(n2->name, "shat");
 	n2->phone = 6660666;
 
+	struct ContactNode* n3 = malloc(sizeof(struct ContactNode));
+	strcpy(n3->name, "shat stick");
+	n3->phone = 66606660;
+
 	struct ContactNode* list = NULL;
 
 	list = addFront(n1, list);
 	list = addFront(n2, list);
+	list = addFront(n3, list);
 
-	printf("name is %s, phone is %d\n", list->name, list->phone);
-	printf("name is %s, phone is %d\n", list->next->name, list->next->phone);
+	display(list);
 
 	return 0;
 }
