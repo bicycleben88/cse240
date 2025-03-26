@@ -16,14 +16,30 @@ struct ContactNode {
 	struct ContactNode* next;
 };
 
+struct ContactNode* addFront(struct ContactNode* node, struct ContactNode* front) {
+	node->next = front;
+	front = node;
+
+	return front;
+}
 
 int main()
 {
-	struct ContactNode* n = malloc(sizeof(struct ContactNode));
-	strcpy(n->name, "whhhat");
-	n->phone = 666;
+	struct ContactNode* n1 = malloc(sizeof(struct ContactNode));
+	strcpy(n1->name, "whhhat");
+	n1->phone = 666;
 
-	printf("name is %s, phone is %d\n", n->name, n->phone);
+	struct ContactNode* n2 = malloc(sizeof(struct ContactNode));
+	strcpy(n2->name, "shat");
+	n2->phone = 6660666;
+
+	struct ContactNode* list = NULL;
+
+	list = addFront(n1, list);
+	list = addFront(n2, list);
+
+	printf("name is %s, phone is %d\n", list->name, list->phone);
+	printf("name is %s, phone is %d\n", list->next->name, list->next->phone);
 
 	return 0;
 }
