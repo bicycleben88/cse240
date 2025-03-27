@@ -1,7 +1,7 @@
 /*
 * Description: Using pointers for string and array operations
-* 
-* Duration: 
+*
+* Duration:
 *
 * Name: Ben Higginbotham
 *
@@ -46,10 +46,10 @@ int isPalindrome(char s[STRING_LENGTH]);
 // The null terminator '\0' is used to denote the end of a string.
 void initializeStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 {
-	char *p = &strings[0][0];
+	char* p = &strings[0][0];
 	// enter code here
 	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i++) {
-		*(p + i) = '\0'; 
+		*(p + i) = '\0';
 	}
 }
 
@@ -58,10 +58,15 @@ void initializeStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 // See the example outputs provided in the word document. Each string should be printed on a new line.
 void printStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 {
-	char *p = &strings[0][0];
+	char* p = &strings[0][0];
 	// enter code here
- 	for (int i = 0; i < NUM_STRINGS; i++) {
-		printf("%s", (p + i));
+	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
+		int j = 0;
+		while (*(p + i + j) != '\0') {
+			printf("%c", *(p + i + j));
+			j++;
+		}
+		printf("\n");
 	}
 }
 
@@ -75,7 +80,7 @@ void printStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 char* reverseOneString(char s[STRING_LENGTH])
 {
 	char temp;					// not necessary to use this variable
-	char *p = &s[0];			// pointer to start of string
+	char* p = &s[0];			// pointer to start of string
 	// enter code here
 
 
@@ -88,7 +93,7 @@ char* reverseOneString(char s[STRING_LENGTH])
 // You may declare and use more pointers if needed.
 void reverseStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 {
-	char *p = &strings[0][0];
+	char* p = &strings[0][0];
 	// enter code here
 
 }
@@ -103,7 +108,7 @@ void reverseStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 //		If you could not implement reverseStrings(), skip using it in this function. You will receive partial credit.
 void encryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 {
-	char *p = &strings[0][0];
+	char* p = &strings[0][0];
 	// enter code here
 
 }
@@ -116,7 +121,7 @@ void encryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 //		If you could not implement reverseStrings(), skip using it in this function. You will receive partial credit.
 void decryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 {
-	char *p = &strings[0][0];
+	char* p = &strings[0][0];
 	// enter code here
 
 }
@@ -130,7 +135,7 @@ void decryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 // Note: you may use reverseOneString() here but it is not necessary to use it. 
 int isPalindrome(char s[STRING_LENGTH])
 {
-	char *p = s;
+	char* p = s;
 	int palindrome = 1;			// edit if needed
 	// enter code here
 
@@ -144,10 +149,10 @@ int main()
 	char strings[NUM_STRINGS][STRING_LENGTH]; // will store four strings each with a max length of 34
 	int i, key;
 	char input[STRING_LENGTH];
-	
+
 	printf("CSE240 HW3: Pointers\n\n");
 	initializeStrings(strings);
-		
+
 	for (i = 0; i < NUM_STRINGS; i++)
 	{
 		printf("Enter a string: ");				// prompt for string
@@ -155,10 +160,10 @@ int main()
 		input[strlen(input) - 1] = '\0';		// convert trailing '\n' char to '\0' (null terminator)
 		strcpy(strings[i], input);				// copy input to 2D strings array
 	}
-	
+
 	printf("\nEnter a key value for encryption: "); // prompt for integer key
-	scanf("%d", &key); 
-	
+	scanf("%d", &key);
+
 	encryptStrings(strings, key);
 	printf("\nEncrypted Strings:\n");
 	printStrings(strings);
