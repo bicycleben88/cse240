@@ -1,11 +1,11 @@
 /*
 * Description: Using pointers for string and array operations
 *
-* Duration:
+* Duration: 4 hours
 *
 * Name: Ben Higginbotham
 *
-* Version: GCC
+* Version: GCC and VS
 */
 
 //CSE240 Homework
@@ -60,7 +60,7 @@ void printStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 {
 	char* p = &strings[0][0];
 	// enter code here
- 	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
+	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
 		int j = i;
 		while (*(p + i) != '\0') {
 			printf("%c", *(p + i));
@@ -83,7 +83,7 @@ char* reverseOneString(char s[STRING_LENGTH])
 	char temp;					// not necessary to use this variable
 	char* p = &s[0];			// pointer to start of string
 	// enter code here
-	char *begin, *last;
+	char* begin, * last;
 	for (int i = 0; i < (strlen(s) / 2); i++) {
 		last = (p + strlen(s) - 1 - i);
 		begin = (p + i);
@@ -151,7 +151,6 @@ void decryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 	reverseStrings(strings);
 }
 
-
 // Problem 7: isPalindrome (10 points)
 // Return 1 if string s is palindrome.
 // Parse through the string to check if 1st char==last char, 2nd char == (last-1) char, and so on..
@@ -164,6 +163,14 @@ int isPalindrome(char s[STRING_LENGTH])
 	char* p = s;
 	int palindrome = 1;			// edit if needed
 	// enter code here
+	char* begin, * last;
+	for (int i = 0; i < (strlen(s) / 2); i++) {
+		last = (p + strlen(s) - 1 - i);
+		begin = (p + i);
+		if (*begin != *last) {
+			return 0;
+		}
+	}
 	return palindrome;
 }
 
