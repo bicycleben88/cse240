@@ -140,8 +140,17 @@ void decryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 {
 	char* p = &strings[0][0];
 	// enter code here
-
+	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
+		int j = i;
+		while (*(p + i) != '\0') {
+			*(p + i) = *(p + i) - key;
+			i++;
+		}
+		i = j;
+	}
+	reverseStrings(strings);
 }
+
 
 // Problem 7: isPalindrome (10 points)
 // Return 1 if string s is palindrome.
