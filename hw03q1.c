@@ -60,12 +60,13 @@ void printStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 {
 	char* p = &strings[0][0];
 	// enter code here
-	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
-		int j = 0;
-		while (*(p + i + j) != '\0') {
-			printf("%c", *(p + i + j));
-			j++;
+ 	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
+		int j = i;
+		while (*(p + i) != '\0') {
+			printf("%c", *(p + i));
+			i++;
 		}
+		i = j;
 		printf("\n");
 	}
 }
@@ -82,8 +83,14 @@ char* reverseOneString(char s[STRING_LENGTH])
 	char temp;					// not necessary to use this variable
 	char* p = &s[0];			// pointer to start of string
 	// enter code here
-
-
+	char *begin, *last;
+	for (int i = 0; i < (strlen(s) / 2); i++) {
+		last = (p + strlen(s) - 1 - i);
+		begin = (p + i);
+		temp = *last;
+		*last = *begin;
+		*begin = temp;
+	}
 	return p;
 }
 
@@ -95,7 +102,9 @@ void reverseStrings(char strings[NUM_STRINGS][STRING_LENGTH])
 {
 	char* p = &strings[0][0];
 	// enter code here
-
+	for (int i = 0; i < (NUM_STRINGS * STRING_LENGTH); i = i + STRING_LENGTH) {
+		reverseOneString(p + i);
+	}
 }
 
 // Problem 5: encryptStrings (5 points)
@@ -110,7 +119,11 @@ void encryptStrings(char strings[NUM_STRINGS][STRING_LENGTH], int key)
 {
 	char* p = &strings[0][0];
 	// enter code here
-
+	reverseStrings(strings);
+	while (*p) {
+		*p = *p + key;
+		p++;
+	}
 }
 // Problem 6: decryptStrings (5 points)
 // HINT: This should be very similiar to the encryption function defined above in encryptStrings().
@@ -138,7 +151,6 @@ int isPalindrome(char s[STRING_LENGTH])
 	char* p = s;
 	int palindrome = 1;			// edit if needed
 	// enter code here
-
 	return palindrome;
 }
 
