@@ -137,25 +137,25 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 	Year;
 	switch(*schoolYear_input) {
 		case 'f':
-		Year = freshman;
-		break;
+			Year = freshman;
+			break;
 		case 's':
-		Year = sophomore;
-		break;
+			Year = sophomore;
+			break;
 		case 'j':
-		Year = junior;
-		break;
+			Year = junior;
+			break;
 		default:
-		Year = senior;
-		break;
+			Year = senior;
+			break;
 	}
 	
 	strcpy(list[count].studentName, studentName_input);
 	strcpy(list[count].major, major_input);
 	list[count].schoolYear = Year;
 	list[count].studentID = studentID_input;
+	count++;
 
-	printf("student name: %s, major: %s, school year: %d, id: %d\n", list[count].studentName, list[count].major, list[count].schoolYear, list[count].studentID);
 	return 0;			// edit this line as needed
 }
 
@@ -166,7 +166,28 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 // NOTE: School year is stored in the struct as enum type. You need to display 'freshman','sophomore', 'junior' or 'senior'
 void display()
 {
+	char *Year;
 
+	for(int i = 0; i < count; i++) {
+		switch(list[i].schoolYear) {
+                case 1:
+                        Year = "freshman";
+                        break;
+                case 2:
+                        Year = "sophomore";
+                        break;
+                case 3:
+                        Year = "junior";
+                        break; 
+                default:
+                        Year = "senior";
+                        break;
+		}
+		printf("Student name: %s\n", list[i].studentName);
+		printf("Major: %s\n", list[i].major);
+		printf("School year: %s\n", Year);
+		printf("Student ID: %d\n", list[i].studentID);   
+	}
 }
 
 
