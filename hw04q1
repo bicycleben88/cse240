@@ -1,7 +1,7 @@
 /*
 * Description: Create Student Record DB with structs, enum, and pointers
 *
-* Duration: 3 hours;
+* Duration: 4 hours;
 * 
 * Name: Ben Higginbotham
 * Version: gcc
@@ -277,5 +277,23 @@ void save(char* fileName)
 //		You can simply delete the file to 'reset the list' or to avoid loading from it.
 void load(char* fileName)
 {
-
+        FILE* file;
+    	int i, schoolYearValue=0;
+        file = fopen(fileName, "r");           		// open file to read
+	
+	if (!file) {
+		printf("%s not found\n", fileName);
+		return;
+	}
+		
+	fread(&count, sizeof(count), 1, file);
+	 
+	for (int i = 0; i < count; i++) {
+		fread(list[i].studentName, sizeof(list[i].studentName), 1, file);
+		fread(list[i].major, sizeof(list[i].major), 1, file);
+	//	fread(schoolYear Year, sizeof(Year), 1, file);
+		fread(&list[i].studentID, sizeof(list[i].studentID), 1, file);			
+	}	
+                      
+        fclose(file);    
 }
