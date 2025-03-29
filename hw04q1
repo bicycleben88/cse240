@@ -1,3 +1,12 @@
+/*
+* Description: Create Student Record DB with structs, enum, and pointers
+*
+* Duration: 3 hours;
+* 
+* Name: Ben Higginbotham
+* Version: gcc
+*/
+
 // CSE240 Homework
 // Be sure to add the standard header above.
 // Write the compiler used: Visual studio or gcc (SELECT ONE AND INDICATE)
@@ -133,6 +142,28 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 	if (count == MAX_STUDENTS) {
 		return 2;
 	}
+	
+	int j = 0; // position to place new record in list of student records 
+
+	// don't add duplicate record
+	for (int i = 0; i < count; i++) {
+		int comp = strcmp(list[i].studentName, studentName_input);
+		if (comp == 0) {
+			return 0;
+		} else if ( comp > 1) {
+			j = i;
+			break;
+		} else {
+			j = i - 1;
+		}
+	}
+       
+	// move all records after j one place to the right 
+	for (int i = count; i > j; i--) {
+		list[i] = list[i - 1];
+        }
+
+	// convert school year string to enum
 	schoolYear Year;
 	Year;
 	switch(*schoolYear_input) {
@@ -150,13 +181,13 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 			break;
 	}
 	
-	strcpy(list[count].studentName, studentName_input);
-	strcpy(list[count].major, major_input);
-	list[count].schoolYear = Year;
-	list[count].studentID = studentID_input;
+	strcpy(list[j].studentName, studentName_input);
+	strcpy(list[j].major, major_input);
+	list[j].schoolYear = Year;
+	list[j].studentID = studentID_input;
 	count++;
 
-	return 0;			// edit this line as needed
+	return 1;			// edit this line as needed
 }
 
 
@@ -167,9 +198,9 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 void display()
 {
 	char *Year;
-
+	
 	for(int i = 0; i < count; i++) {
-		switch(list[i].schoolYear) {
+		switch(list[i].schoolYear) {  // convert school year enum to string
                 case 1:
                         Year = "freshman";
                         break;
@@ -183,11 +214,12 @@ void display()
                         Year = "senior";
                         break;
 		}
-		printf("Student name: %s\n", list[i].studentName);
+		printf("\nStudent name: %s\n", list[i].studentName);
 		printf("Major: %s\n", list[i].major);
 		printf("School year: %s\n", Year);
 		printf("Student ID: %d\n", list[i].studentID);   
 	}
+	printf("\n");
 }
 
 
