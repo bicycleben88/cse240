@@ -1,7 +1,7 @@
 /*
 * Description: Student Records with linked list
 *
-* Duration: 
+* Duration:
 *
 * Author: Ben Higginbotham
 * Version: GCC
@@ -52,11 +52,11 @@ void displayList();						// 10 points
 int countNodes();						// 5 points
 int deleteNode(char* studentName_input);	// 10 points
 void swapNodes(struct studentRecord* node1, struct studentRecord* node2);	// 5 points
-						
+
 
 
 int main()
-{	
+{
 	char selection = 'i';		// initialized to a dummy value
 	printf("\nCSE240 HW5\n");
 	do
@@ -79,7 +79,7 @@ int main()
 void flushStdIn()
 {
 	char c;
-	do c = getchar(); 
+	do c = getchar();
 	while (c != '\n' && c != EOF);
 }
 
@@ -114,7 +114,7 @@ void executeAction(char c)
 			printf("\nStudent is already on the list! \n\n");
 		else if (result == 1)
 			printf("\nStudent successfully added to the list! \n\n");
-		
+
 		break;
 
 	case 'd':		// display the list
@@ -138,7 +138,7 @@ void executeAction(char c)
 
 	case 'q':		// quit
 		break;
-	default: printf("%c is invalid input!\n",c);
+	default: printf("%c is invalid input!\n", c);
 	}
 }
 
@@ -155,52 +155,57 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 {
 	struct studentRecord* tempList = list;	// work on a copy of 'list'
 	// enter code here
+	struct studentRecord* newRecord = malloc(sizeof(struct studentRecord));
 
 	// convert school year input string into enum
 	schoolYearType Year;
-        Year = 0;
+	Year = 0;
 	if (strcmp(schoolYear_input, "freshman") == 0) {
 		Year = freshman;
-	} else if (strcmp(schoolYear_input, "sophomore") == 0) {
+	}
+	else if (strcmp(schoolYear_input, "sophomore") == 0) {
 		Year = sophomore;
-	} else if (strcmp(schoolYear_input, "junior") == 0) {
+	}
+	else if (strcmp(schoolYear_input, "junior") == 0) {
 		Year = junior;
-	} else if (strcmp(schoolYear_input, "senior") == 0) {
+	}
+	else if (strcmp(schoolYear_input, "senior") == 0) {
 		Year = senior;
-	} else {
+	}
+	else {
 		printf("\ninvalid input, school year will default to freshman\n");
 	}
-	
-	tempList = malloc(sizeof(struct studentRecord));
-	
+
 	// check if list is empty
 	if (list == NULL) {
 		// add student to begining of list
-        	strcpy(tempList -> studentName, studentName_input);
-        	strcpy(tempList -> major, major_input);
-        	tempList -> schoolYear = Year;
-        	tempList -> IDNumber = IDNumber_input;
-        	tempList -> next = NULL;
-		list = tempList;
-	} else {
+		strcpy(newRecord->studentName, studentName_input);
+		strcpy(newRecord->major, major_input);
+		newRecord->schoolYear = Year;
+		newRecord->IDNumber = IDNumber_input;
+		newRecord->next = NULL;
+		list = newRecord;
+	}
+	else {
 		// traverse list to look for duplicate record
-		while (list != NULL) {
-			if (strcmp(list -> studentName, studentName_input) == 0) {
+		while (tempList != NULL) {
+			if (strcmp(tempList->studentName, studentName_input) == 0) {
 				return 0;
-			} else if (list -> next != NULL) {
-				list = list -> next;
-			} else {
+			}
+			else if (tempList->next != NULL) {
+				tempList = tempList->next;
+			}
+			else {
 				break;
 			}
 		}
 		// add student to end of list
-        	strcpy(tempList -> studentName, studentName_input);
-        	strcpy(tempList -> major, major_input);
-        	tempList -> schoolYear = Year;
-        	tempList -> IDNumber = IDNumber_input;
-        	tempList -> next = NULL;
-	      	list -> next = tempList;
-
+		strcpy(newRecord->studentName, studentName_input);
+		strcpy(newRecord->major, major_input);
+		newRecord->schoolYear = Year;
+		newRecord->IDNumber = IDNumber_input;
+		newRecord->next = NULL;
+		tempList->next = newRecord;
 	}
 	return 1;	// edit this line as needed
 }
@@ -213,29 +218,29 @@ void displayList()
 {
 	struct studentRecord* tempList = list;				// work on a copy of 'list'
 	// enter code here
-	while(tempList) {
+	while (tempList) {
 		// convert school year enum into string 
-	        char Year[10];
-        	switch(tempList -> schoolYear) {
-                	 case freshman:
-                        	strcpy(Year,"freshman");
-                         	break;
-                 	case sophomore:
-                        	strcpy(Year,"sophomore");
-                         	break;
-                 	case junior:
-                        	strcpy(Year, "junior");
-                         	break;
-                 	default:
-                       		strcpy(Year, "senior");
-                        	break;
-    		}      
-            	printf("\nStudent Name: %s\n", tempList -> studentName);
-		printf("Student Major: %s\n", tempList -> major);
+		char Year[10];
+		switch (tempList->schoolYear) {
+		case freshman:
+			strcpy(Year, "freshman");
+			break;
+		case sophomore:
+			strcpy(Year, "sophomore");
+			break;
+		case junior:
+			strcpy(Year, "junior");
+			break;
+		default:
+			strcpy(Year, "senior");
+			break;
+		}
+		printf("\nStudent Name: %s\n", tempList->studentName);
+		printf("Student Major: %s\n", tempList->major);
 		printf("SchoolYear: %s\n", Year);
-		printf("ID Number: %d\n", tempList -> IDNumber); 
-		tempList = tempList -> next;
-	}	
+		printf("ID Number: %d\n", tempList->IDNumber);
+		tempList = tempList->next;
+	}
 
 }
 
@@ -248,9 +253,9 @@ int countNodes()
 {
 	struct studentRecord* tempList = list;                          // work on a copy of 'list'
 	int count = 0;
-	while(tempList) {
+	while (tempList) {
 		count++;
-		tempList = tempList -> next;
+		tempList = tempList->next;
 	}
 	return count;	// edit this line as needed
 }
@@ -263,17 +268,17 @@ int countNodes()
 //        After removing "node_to_remove", the list is broken into "list ....node1" and "node2.... end". Stitch these lists.)
 
 int deleteNode(char* studentName_input)
-{	
+{
 	struct studentRecord* tempList = list;				// work on a copy of 'list'
-	
-	while(tempList) {
-		if (strcmp(tempList -> studentName, studentName_input) == 0) {
+
+	while (tempList) {
+		if (strcmp(tempList->studentName, studentName_input) == 0) {
 			printf("found a match!\n");
 			return 1;
 		}
-		tempList = tempList -> next;	
+		tempList = tempList->next;
 	}
-	
+
 	return 0;			// edit this line as needed
 }
 
@@ -286,7 +291,7 @@ int deleteNode(char* studentName_input)
 
 void swapNodes(struct studentRecord* node1, struct studentRecord* node2)
 {
-	
+
 }
 
 
