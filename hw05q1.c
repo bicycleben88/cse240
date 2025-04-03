@@ -162,8 +162,7 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 	Year = 0;
 	if (strcmp(schoolYear_input, "freshman") == 0) {
 		Year = freshman;
-	}
-	else if (strcmp(schoolYear_input, "sophomore") == 0) {
+	} else if (strcmp(schoolYear_input, "sophomore") == 0) {
 		Year = sophomore;
 	}
 	else if (strcmp(schoolYear_input, "junior") == 0) {
@@ -206,6 +205,10 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 		newRecord->IDNumber = IDNumber_input;
 		newRecord->next = NULL;
 		tempList->next = newRecord;
+	}
+
+	if (countNodes() > 1) {
+		swapNodes(list, list -> next);
 	}
 	return 1;	// edit this line as needed
 }
@@ -316,7 +319,22 @@ int deleteNode(char* studentName_input)
 
 void swapNodes(struct studentRecord* node1, struct studentRecord* node2)
 {
+	struct studentRecord* tempList = malloc(sizeof(struct studentRecord));
+	
+	strcpy(tempList -> studentName, node1 -> studentName);
+	strcpy(tempList -> major, node1 -> major);
+	tempList -> schoolYear = node1 -> schoolYear;
+	tempList -> IDNumber = node1 -> IDNumber;
 
+	strcpy(node1 -> studentName, node2 -> studentName);
+        strcpy(node1 -> major, node2 -> major);
+        node1 -> schoolYear = node2 -> schoolYear;
+        node1 -> IDNumber = node2 -> IDNumber;
+
+	strcpy(node2 -> studentName, tempList -> studentName);
+        strcpy(node2 -> major, tempList -> major);
+        node2 -> schoolYear = tempList -> schoolYear;
+        node2 -> IDNumber = tempList -> IDNumber;
 }
 
 
