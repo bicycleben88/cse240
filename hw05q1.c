@@ -269,14 +269,39 @@ int countNodes()
 
 int deleteNode(char* studentName_input)
 {
-	struct studentRecord* tempList = list;				// work on a copy of 'list'
+	// return 0 if list is empty
+	if (list == NULL) {
+		return 0;
+	}
 
+	struct studentRecord* prev = list;
+	struct studentRecord* tempList = list->next;
+	
+	// remove first node if it matches student name input
+	if (strcmp(prev -> studentName, studentName_input) == 0) {
+		if (prev -> next != NULL) {
+			list = list -> next;
+			free(prev);
+		} else {
+			list = NULL;
+			free(list);
+		}
+		return 1;
+	}
+	
 	while (tempList) {
 		if (strcmp(tempList->studentName, studentName_input) == 0) {
-			printf("found a match!\n");
+			if (tempList -> next != NULL) {
+				prev -> next = tempList -> next;
+				free(tempList);
+			} else {
+				prev -> next = NULL;
+				free(tempList);
+			}
 			return 1;
 		}
-		tempList = tempList->next;
+		prev = tempList;
+		tempList = tempList -> next;
 	}
 
 	return 0;			// edit this line as needed
