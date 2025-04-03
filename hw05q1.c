@@ -1,7 +1,7 @@
 /*
 * Description: Student Records with linked list
 *
-* Duration:
+* Duration: 7
 *
 * Author: Ben Higginbotham
 * Version: GCC
@@ -184,8 +184,7 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 		newRecord->IDNumber = IDNumber_input;
 		newRecord->next = NULL;
 		list = newRecord;
-	}
-	else {
+	} else {
 		// traverse list to look for duplicate record
 		while (tempList != NULL) {
 			if (strcmp(tempList->studentName, studentName_input) == 0) {
@@ -208,7 +207,14 @@ int addSort(char* studentName_input, char* major_input, char* schoolYear_input, 
 	}
 
 	if (countNodes() > 1) {
-		swapNodes(list, list -> next);
+		tempList = list;
+		while(tempList != NULL) {
+			if (strcmp(tempList -> studentName, newRecord -> studentName) > 0) {
+				swapNodes(tempList, newRecord);	
+				break;
+			}
+			tempList = tempList -> next;
+		}
 	}
 	return 1;	// edit this line as needed
 }
