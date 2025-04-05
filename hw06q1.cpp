@@ -134,6 +134,12 @@ int addPatient(string name_input, int age_input, int DOByear_input, int ID_input
 	if (currentCount == MAX_PATIENTS) {
 		return 0;		
 	}
+
+	for (int i = 0; i < currentCount; i++) {
+		if (s[i].getName().compare(name_input) == 0) {
+			return 0;
+		}	
+	}
 	
 	Patient *newPatient = new Patient();
 	newPatient -> setName(name_input);
