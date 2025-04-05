@@ -1,3 +1,11 @@
+/*
+* Description: Create a list of Patient objects
+*
+* Duration: 4 hrs
+*
+* Author: Ben Higginbotham
+* Version: g++
+*/
 
 // CSE240 
 // Be sure to add the standard header above.
@@ -123,6 +131,18 @@ void executeAction(char c)
 // Assume user enters age in 0.0 - any positive integer range.
 int addPatient(string name_input, int age_input, int DOByear_input, int ID_input)
 {
+	if (currentCount == MAX_PATIENTS) {
+		return 0;		
+	}
+	
+	Patient *newPatient = new Patient();
+	newPatient -> setName(name_input);
+	newPatient -> setAge(age_input);
+	newPatient -> setDOByear(DOByear_input);
+	newPatient -> setID(ID_input);
+
+	s[currentCount] = *newPatient;
+	currentCount++; 
 
 	return 1;	// edit this line if needed
 }
@@ -134,7 +154,10 @@ int addPatient(string name_input, int age_input, int DOByear_input, int ID_input
 // Patient::displayPatient() displays details of one Patient object, while displayPatients() should display all patients
 void displayPatients()
 {
-
+	for (int i = 0; i < currentCount; i++) {
+		s[i].displayPatient();
+		cout << endl;
+	}
 }
 
 // Q5 sort (10 points)
