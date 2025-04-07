@@ -174,8 +174,35 @@ void sort()
 {
 	Patient temp;
 	// enter code here
+	int lowerBound, higherBound, agedPatientsCount = 0;
+	Patient agedPatients[currentCount];
 
-
+	cout << "Please enter lower bound of age: ";
+        cin >> lowerBound;
+	cin.ignore();
+        cout << "Please enter higher bound of age: ";
+        cin >> higherBound;
+        cin.ignore();
+	
+	for (int i = 0; i < currentCount; i++) {
+		if (s[i].getAge() <= higherBound && s[i].getAge() >= lowerBound) {
+			temp.setName(s[i].getName()); 
+        		temp.setAge(s[i].getAge());
+        		temp.setDOByear(s[i].getDOByear());
+        		temp.setID(s[i].getID());
+			agedPatients[agedPatientsCount] = temp;
+			agedPatientsCount++;
+		}
+	}
+	
+	if (agedPatientsCount > 0) {
+		for (int i = 0; i < agedPatientsCount; i++) {
+                	agedPatients[i].displayPatient();
+                	cout << endl;
+        	}	
+	} else {
+		cout << "No patient is between " << lowerBound << "and " << higherBound << " years old" << endl;
+	}
 }
 
 // Q6 oldestPatient (5 points)
