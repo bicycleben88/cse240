@@ -196,12 +196,30 @@ void sort()
 	}
 	
 	if (agedPatientsCount > 0) {
+		for (int i = 1; i < agedPatientsCount; i++) {
+			int j = i;
+			int age = agedPatients[i].getAge();
+			temp.setName(agedPatients[i].getName());
+			temp.setAge(age);
+			temp.setDOByear(agedPatients[i].getDOByear());
+			temp.setID(agedPatients[i].getID());
+			while (j > 0 && agedPatients[j - 1].getAge() < age) {
+				agedPatients[j].setName(agedPatients[j - 1].getName());
+				agedPatients[j].setAge(agedPatients[j - 1].getAge());
+				agedPatients[j].setDOByear(agedPatients[j - 1].getDOByear());
+				agedPatients[j].setID(agedPatients[j - 1].getID());
+				j--;
+			}
+			agedPatients[j] = temp;
+		}
+
+
 		for (int i = 0; i < agedPatientsCount; i++) {
                 	agedPatients[i].displayPatient();
-                	cout << endl;
+                	cout << endl; 
         	}	
 	} else {
-		cout << "No patient is between " << lowerBound << "and " << higherBound << " years old" << endl;
+		cout << "No patient is between " << lowerBound << " and " << higherBound << " years old" << endl;
 	}
 }
 
