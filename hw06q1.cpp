@@ -177,10 +177,10 @@ void sort()
 	int lowerBound, higherBound, agedPatientsCount = 0;
 	Patient agedPatients[currentCount];
 
-	cout << "Please enter lower bound of age: ";
+	cout << "Please enter the lower bound of age: ";
         cin >> lowerBound;
 	cin.ignore();
-        cout << "Please enter higher bound of age: ";
+        cout << "Please enter the higher bound of age: ";
         cin >> higherBound;
         cin.ignore();
 	
@@ -237,5 +237,31 @@ void oldestPatient()
 	char startingCharacter;				// Ask the user for a character
 	Patient* newPatient = new Patient;
 	// enter code here
+	if (currentCount == 0) {
+		cout << "There are no patients in the list" << endl;
+		return;
+	}
 
+	cout << "Enter the first letter of the patient's name " << endl;
+	cin >> startingCharacter;
+	
+	int oldestPatientIndex;
+	int oldestPatientAge = 0;
+
+	for (int i = 0; i < currentCount; i++) {
+		int patientAge = s[i].getAge();
+		char patientInitial = s[i].getName()[0];
+		if (patientInitial == startingCharacter && patientAge > oldestPatientAge) {
+			oldestPatientIndex = i;
+			oldestPatientAge = patientAge;
+		}
+	}
+
+	newPatient -> setName(s[oldestPatientIndex].getName());
+	newPatient -> setAge(s[oldestPatientIndex].getAge());
+	newPatient -> setDOByear(s[oldestPatientIndex].getDOByear());
+	newPatient -> setID(s[oldestPatientIndex].getID());
+
+	newPatient -> displayPatient();
+	delete newPatient;	
 }
