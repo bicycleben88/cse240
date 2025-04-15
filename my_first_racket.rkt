@@ -36,7 +36,7 @@
 (define (square x)
   (if (= x 0)
       0
-      (square (- x 1))))
+      (add (square (- (abs x) 1)) (- (* 2 (abs x)) 1)))) 
  
 ; Q4
 (define (read-for-square) (square(read)))
@@ -53,6 +53,8 @@
 
 ; Q7
 (define (fib a)
-  (if (= a 0)
-  0
-  (add (fib (- a 1)) 2)))
+  (cond ((= a 0) 0)
+        ((= a 1) 1)
+        (else (add (fib (- a 1)) (fib (- a 2)))
+      )))
+   
