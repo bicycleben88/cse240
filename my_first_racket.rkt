@@ -5,7 +5,7 @@
 ; For the first assignment, we are providing the default header so you can see how it
 ; looks in Scheme. For future assignments, you will need to add it yourself.
 ;
-; Completion time: (fill in)
+; Completion time: (3 hrs)
 ;
 ; @author Ben Higginbotham
 ; @version 04-14-2025
@@ -33,23 +33,28 @@
 (define (add x y) (+ x y)) 
 
 ; Q3
+; The code for size-n problem is: 
 (define (square x)
+  ; The code for stopping condition and its return value are:
   (if (= x 0)
       0
-      (add (square (- (abs x) 1)) (- (* 2 (abs x)) 1)))) 
- 
+      ; The code for size-m problem is: (square (- (abs x) 1))
+      ; The code for constructing size-n problem is:
+      (add (square (- (abs x) 1)) (- (* 2 (abs x)) 1))))
+
 ; Q4
 (define (read-for-square) (square(read)))
 
 ; Q5
 (define (diff-squares)
-  (- (read-for-square) (read-for-square)))
+  (abs (- (read-for-square) (read-for-square))))
 
 ; Q6
 (define (sum-odds max)
-  (if (= max 0)
-  0
-  (sum-odds (- max 1)))) 
+  (cond ((<= max 1) 1)
+        ((odd? max) (+ (sum-odds (- max 1)) max)) 
+        (else (sum-odds (- max 1))
+       ))) 
 
 ; Q7
 (define (fib a)
