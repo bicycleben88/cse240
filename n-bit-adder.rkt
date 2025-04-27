@@ -53,8 +53,8 @@
 ; enter your code here:
 (define (XOR-gate A B)
         (cond 
-             ((and (= A 1) (= B 0)) 1)
-             ((and (= A 0) (= B 1)) 1) 
+             ((= (AND-gate A B) 1) 0)
+             ((= (OR-gate A B) 1) 1) 
              (0)))
 ; Test cases
 (display "XOR-Gate Output\n")
@@ -70,15 +70,20 @@
 
 ;Q3.1
 ; enter your code here:
-
+(define (half-adder x A B)
+        (XOR-gate x (XOR-gate A B)))
 
 ;Q3.2
 ; enter your code here:
-
+(define (carry-out x A B)
+        (OR-gate
+                (AND-gate A B)
+                (AND-gate (XOR-gate A B) x)))
 
 ;Q3.3
 ; enter your code here:
-
+(define (full-adder x A B)
+        (cons (carry-out x A B) (half-adder x A B)))
 
 ; Test cases
 (Display "half-adder Output\n")
