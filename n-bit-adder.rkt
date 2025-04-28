@@ -2,7 +2,7 @@
 ; CSE240 Functional Programming 3 Homework
 ; Description: Creatre an n-bit Adder
 ;
-; Completion time: (fill in)
+; Completion time: 4 hours
 ;
 ; @author Ben Higginbotham
 ; @version 6.0
@@ -131,27 +131,46 @@
 
 ;Q4.1
 ; enter your code here:
-
+(define (tail lst)
+        (if (= (length lst) 0)
+            0
+          (if (= (length lst) 1)
+              (car lst)
+              (tail (cdr lst)))))
 
 ;Q4.2
-
+(define (rmtail lst)
+        (if (< (length lst) 2)
+            '()
+            (cons (car lst) (rmtail (cdr lst)))))
 
 ;Q4.3
 ; Step 1 size-n problem: Lines of code
-; ---->
+; ----> 163, 168
 
 ; Step 2 Stopping condition: Lines of code
-; ---->
+; ----> 164-165, 169-170
 
 ; Step 3 size-m problem: Lines of code
-; ---->
+; ----> 166, 172
 
 ; Step 4: Lines of code
-; ---->
+; ----> 166, 172-173
 
 
 ;Q4.4
 ; enter your code here:
+(define (n-bit-adder A B n)
+        (if (> n 0)
+            (recursive-add A B 0)
+            (n-bit-adder (rmtail A) (rmtail B) (- n 1))))
+
+(define recursive-add (lambda (A B c)  
+        (if (null? A)
+            '()
+            (let ((result (full-adder 0 (tail A) (tail B))))
+             (append (recursive-add (rmtail A)(rmtail B) (carry-out (car result)(tail A)(tail B)))
+                     (list (cdr result)))))))
 
 
 ;Test cases
